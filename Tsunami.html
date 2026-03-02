@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Edukasi Tsunami</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+body{
+font-family:Fredoka, sans-serif;
+margin:0;
+background:linear-gradient(#cdefff,#f4fbff);
+text-align:center;
+overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
+header{
+background:#0077b6;
+color:white;
+padding:20px;
+font-size:24px;
+font-weight:bold;
+}
+
+/* ================= CONTAINER ================= */
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+/* ================= HOST BUMI ================= */
+
+.host-wrapper{
+animation:enter 1s ease;
+}
+
+@keyframes enter{
+from{opacity:0; transform:translateY(60px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+.earth-host{
+width:150px;
+height:150px;
+margin:20px auto;
+border-radius:50%;
+background:radial-gradient(circle at 35% 35%, #4cc9f0, #0077b6);
+position:relative;
+box-shadow:0 12px 25px rgba(0,0,0,.25);
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
+}
+
+.face{
+position:absolute;
+top:45px;
+left:0;
+right:0;
+}
+
+.eye{
+width:16px;
+height:16px;
+background:white;
+border-radius:50%;
+position:absolute;
+animation:blink 5s infinite;
+}
+
+.eye.left{ left:42px; }
+.eye.right{ right:42px; }
+
+@keyframes blink{
+0%,92%,100%{transform:scaleY(1);}
+95%{transform:scaleY(0.1);}
+}
+
+.mouth{
+width:40px;
+height:20px;
+border-bottom:4px solid white;
+border-radius:0 0 40px 40px;
+margin:22px auto;
+transition:.2s;
+}
+
+.talking{
+height:10px;
+background:white;
+border:none;
+border-radius:10px;
+}
+
+/* tangan */
+.hand{
+width:22px;
+height:55px;
+background:#4cc9f0;
+position:absolute;
+top:55px;
+border-radius:20px;
+}
+
+.left-hand{
+left:-20px;
+animation:wave 2s infinite;
+}
+
+.right-hand{
+right:-20px;
+}
+
+@keyframes wave{
+0%{transform:rotate(0deg);}
+50%{transform:rotate(-30deg);}
+100%{transform:rotate(0deg);}
+}
+
+/* ================= CHAT ================= */
+.bubble{
+background:#fff;
+padding:12px 20px;
+border-radius:20px;
+display:inline-block;
+margin:15px;
+box-shadow:0 4px 10px rgba(0,0,0,.2);
+min-height:40px;
+}
+
+/* ================= BUTTON ================= */
+button{
+padding:10px 18px;
+margin:6px;
+border:none;
+border-radius:10px;
+background:#0077b6;
+color:white;
+cursor:pointer;
+font-weight:bold;
+transition:.2s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* ================= SECTION ================= */
+.section{
+margin:30px 0;
+}
+
+/* ================= LINK BUTTON ================= */
+.btn{
+display:inline-block;
+padding:10px 18px;
+background:#0077b6;
+color:white;
+text-decoration:none;
+border-radius:10px;
+margin:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>🌊 Edukasi Tsunami</header>
+
+<div class="container">
+<div class="card">
+
+<!-- HOST BUMI -->
+<div class="host-wrapper">
+<div class="earth-host">
+
+<div class="face">
+<div class="eye left"></div>
+<div class="eye right"></div>
+<div class="mouth" id="mouth"></div>
+</div>
+
+<div class="hand left-hand"></div>
+<div class="hand right-hand"></div>
+
+</div>
+</div>
+
+<div class="bubble" id="bubble">
+Halo! Aku Bumi 🌎 Yuk belajar tentang Tsunami!
+</div>
+
+<!-- TUJUAN -->
+<div class="section">
+<h2>🎯 Tujuan Pembelajaran</h2>
+<p>
+Memahami penyebab tsunami serta mengetahui langkah penyelamatan diri saat terjadi tsunami.
+</p>
+</div>
+
+<!-- MATERI -->
+<div class="section">
+<h2>📘 Materi Pembelajaran</h2>
+
+<button onclick="materi(1)">Apa itu Tsunami?</button>
+<button onclick="materi(2)">Penyebab Tsunami</button>
+<button onclick="materi(3)">Dampak Tsunami</button>
+
+<p id="isiMateri">
+Klik tombol materi untuk mulai belajar 👆
+</p>
+</div>
+
+<!-- MITIGASI -->
+<div class="section">
+<h2>🛑 Cara Aman Saat Tsunami</h2>
+
+<p>
+✅ Segera menuju tempat tinggi<br>
+✅ Jauhi pantai setelah gempa<br>
+✅ Ikuti jalur evakuasi<br>
+✅ Dengarkan informasi resmi
+</p>
+
+</div>
+
+</div>
+
+<a href="belajar.html" class="btn">⬅ Kembali</a>
+
+</div>
+
+<script>
+
+/* HOST BERBICARA */
+function typeText(text){
+
+let bubble=document.getElementById("bubble");
+let mouth=document.getElementById("mouth");
+
+bubble.innerHTML="";
+let i=0;
+
+let typing=setInterval(()=>{
+
+bubble.innerHTML+=text.charAt(i);
+
+mouth.classList.add("talking");
+
+setTimeout(()=>{
+mouth.classList.remove("talking");
+},120);
+
+i++;
+
+if(i>=text.length){
+clearInterval(typing);
+mouth.classList.remove("talking");
+}
+
+},35);
+}
+
+/* MATERI */
+function materi(x){
+
+if(x==1){
+typeText("Tsunami adalah gelombang laut besar akibat gangguan di dasar laut.");
+}
+
+if(x==2){
+typeText("Tsunami biasanya disebabkan oleh gempa bumi bawah laut.");
+}
+
+if(x==3){
+typeText("Tsunami dapat merusak wilayah pesisir dan membahayakan manusia.");
+}
+
+}
+
+</script>
+
+</body>
+</html>
